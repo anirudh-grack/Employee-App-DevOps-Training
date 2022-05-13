@@ -6,18 +6,18 @@ pipeline {
     stages {
         stage('Code Checkout') {
             agent { 
-                label 'SonarQube on AWS'
+                label 'sonar_qube'
             }
             steps {
-                git 'https://github.com/shashank-ssriva/Employee-App-DevOps-Training.git'
+                git 'https://github.com/anirudhgrack/Employee-App-DevOps-Training.git'
             }
         }
         stage('SonarQube Analysis') {
             agent { 
-                label 'SonarQube on AWS'
+                label 'sonar_qube'
             }
             steps {
-                withSonarQubeEnv('SonarCloud') {
+                withSonarQubeEnv('sonarcloud') {
                 echo env.BUILD_NUMBER
                 echo "${TAG}"
                 sh "/usr/bin/envsubst < sonar-project.properties > /tmp/sonar-project.properties"
